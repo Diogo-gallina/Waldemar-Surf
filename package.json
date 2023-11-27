@@ -1,0 +1,24 @@
+{
+  "name": "waldemar-surf",
+  "version": "1.0.0",
+  "description": "Typescript Node.js API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Diogo-gallina/Waldemar-Surf.git"
+  },
+  "keywords": [
+    "nodejs",
+    "typescript",
+    "api"
+  ],
+  "author": "Diogo Gallina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Diogo-gallina/Waldemar-Surf/issues"
+  },
+  "homepage": "https://github.com/Diogo-gallina/Waldemar-Surf#readme"
+}
