@@ -1,5 +1,7 @@
-declare namespace NodeJS {
+import { SuperTest, Test } from "supertest";
+
+declare global {
   interface Global {
-    testRequest: import('supertest').SuperTest<import('supertest').Test>;
+    var testRequest: SuperTest<Test>;
   }
 }
