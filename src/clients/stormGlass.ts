@@ -20,7 +20,6 @@ export interface StormGlassForecastResponse {
   meta: 
 }
 
-
 export class StormGlass {
   readonly stormGlassAPIParams =
     'swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,windDirection,windSpeed';
