@@ -1,5 +1,7 @@
 import { StormGlass } from '@src/clients/stormGlass';
 import axios from 'axios';
+import stormGlassWeather3HoursFixture from '@test/fixtures/stormglass_weather_3_hours.json';
+import stormGlassNormalized3HoursFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
 
 jest.mock('axios');
 
@@ -8,11 +10,11 @@ describe('StormGlass Client', () => {
     const latitude = -33.792726;
     const longitude = 151.289824;
 
-axios.get = jest.fn().mockResolvedValue({});
+    axios.get = jest.fn().mockResolvedValue(stormGlassWeather3HoursFixture);
 
     const stormGlass = new StormGlass(axios);
     const response = await stormGlass.fetchPoints(latitude, longitude);
     
-    expect(response).toEqual({})
+    expect(response).toEqual(stormGlassNormalized3HoursFixture)
   });
 })
