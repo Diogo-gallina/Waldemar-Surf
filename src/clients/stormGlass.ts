@@ -17,7 +17,17 @@ export interface StormGlassPoint {
 
 export interface StormGlassForecastResponse {
   hours: StormGlassPoint[];
-  meta: 
+}
+
+export interface ForecastPoint {
+  time: string;
+  swellDirection: number;
+  swellHeight: number;
+  swellPeriod: number;
+  waveDirection: number;
+  waveHeight: number;
+  windDirection: number;
+  windSpeed: number;
 }
 
 export class StormGlass {
@@ -28,10 +38,12 @@ export class StormGlass {
   constructor(protected request: AxiosStatic) {}
 
   public async fetchPoints(latitude: number, longitude: number): Promise<{}> {
-    return this.request.get(
+    const response = this.request.get<StormGlassForecastResponse>(
       `https://api.stormglass.io/v2/weather/point?lat=${latitude}&lng=${longitude}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}`
     );
   }
 
+  private normalizeResponse(points: StormGlassForecastResponse): ForecastPoint{
 
+  }
 }
