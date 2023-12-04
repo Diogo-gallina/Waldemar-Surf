@@ -19,4 +19,26 @@ describe('StormGlass Client', () => {
 
     expect(response).toEqual(stormGlassNormalized3HoursFixture);
   });
+
+  it('should exclude incomplete data points', async () => {
+    const latitude = -33.792726;
+    const longitude = 151.289824;
+    const incompleteResponse = {
+      hours: [
+        {
+          windDirection: {
+            noaa: 300,
+          },
+          time: '2023-04-26T00:00:00+00:00',
+        },
+      ],
+    };
+
+    mockedAxios.get.mockResolvedValue({ data: incompleteResponse });
+
+    const stormGlass = new StormGlass(mockedAxios);
+    const response = await stormGlass.fetchPoints(latitude, longitude);
+
+    expect(response).toEqual([]);
+  });
 });
