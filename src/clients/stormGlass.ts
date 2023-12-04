@@ -46,7 +46,18 @@ export class StormGlass {
   private normalizeResponse(
     points: StormGlassForecastResponse
   ): ForecastPoint[] {
-    return points.hours.filter()
+    return points.hours
+      .filter(this.isValidPoint.bind(this))
+      .map((point) => ({
+        swellDirection: point.swellDirection[this.stormGlassAPISource],
+        swellHeight: point.swellHeight[this.stormGlassAPISource],
+        swellPeriod: point.swellPeriod[this.stormGlassAPISource],
+        time: point.time,
+        windDirection: point.windDirection[this.stormGlassAPISource],
+        waveHeight: point.waveHeight[this.stormGlassAPISource],
+        waveDirection: point.waveDirection[this.stormGlassAPISource],
+        windSpeed: point.windSpeed[this.stormGlassAPISource],
+      }));
   }
 
   private isValidPoint(point: Partial<StormGlassPoint>): boolean {
@@ -59,6 +70,6 @@ export class StormGlass {
       point.waveHeight?.[this.stormGlassAPISource] &&
       point.windDirection?.[this.stormGlassAPISource] &&
       point.windSpeed?.[this.stormGlassAPISource]
-    )
+    );
   }
 }
