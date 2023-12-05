@@ -39,6 +39,14 @@ export class ClientRequestError extends InternalError {
   }
 }
 
+export class StormGlassResponseError extends InternalError {
+  constructor(message: string) {
+    const internalMessage =
+      'Unexpected error when trying to communicate to StormGlass service';
+    super(`${internalMessage}: ${message}`);
+  }
+}
+
 export class StormGlass {
   readonly stormGlassAPIParams =
     'swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,windDirection,windSpeed';
@@ -58,8 +66,7 @@ export class StormGlass {
       );
       return this.normalizeResponse(response.data);
     } catch (err) {
-      if (err instanceof Error) 
-        throw new ClientRequestError(err.message);
+      if (err instanceof Error) throw new ClientRequestError(err.message);
       throw new ClientRequestError('Unknown error occurred');
     }
   }
