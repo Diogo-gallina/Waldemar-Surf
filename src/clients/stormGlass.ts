@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InternalError } from '@src/util/errors/internal-error';
 import { AxiosError, AxiosStatic } from 'axios';
 
@@ -81,6 +82,7 @@ export class StormGlass {
       throw new ClientRequestError((err as { message: any }).message);
     }
   }
+
   private normalizeResponse(
     points: StormGlassForecastResponse
   ): ForecastPoint[] {
