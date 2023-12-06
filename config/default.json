@@ -1,6 +1,6 @@
 {
   "App": {
-    "resources":{
+    "resource":{
       "StormGlass": {
         "apiUrl":  "http://api.stormglass.io/v2",
         "apiToken": "do-not-hard-code"
