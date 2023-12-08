@@ -1,8 +1,15 @@
 import { StormGlass } from '@src/clients/stormGlass'
 
+export enum BeachPosition {
+    S = 'S',
+    E = 'E',
+    W = 'W',
+    N = 'N'
+}
+
 export interface Beach {
     name: string;
-    positiron: string;
+    positiron: BeachPosition;
     lat: number;
     lng: number;
     user: string;
