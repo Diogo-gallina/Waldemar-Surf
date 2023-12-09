@@ -1,5 +1,6 @@
 import { StormGlass } from '@src/clients/stormGlass';
 import stormGlassNormalizedResponseFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
+import { Beach, BeachPosition } from '../forecast';
 
 jest.mock('@src/clients/stormGlass');
 
@@ -9,12 +10,12 @@ describe('Forecast Service', async () => {
       .fn()
       .mockResolvedValue(stormGlassNormalizedResponseFixture);
 
-    const beaches = [
+    const beaches: Beach[] = [
       {
         lat: -33.792726,
         lng: 151.289824,
         name: 'Manly',
-        position: 'E',
+        position: BeachPosition.E,
         user: 'some-id',
       },
     ];
