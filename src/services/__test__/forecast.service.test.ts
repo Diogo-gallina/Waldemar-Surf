@@ -87,4 +87,10 @@ describe('Forecast Service', () => {
 
     expect(beachesWithRating).toEqual(expectedResponse);
   });
+
+  it('should return an empty list when the beach array is empty', async () => {
+    const forecast = new Forecast();
+    const response = await forecast.processForecastForBeach([]);
+    expect(response).toEqual([]);
+  });
 });
