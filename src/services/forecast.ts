@@ -38,5 +38,6 @@ export class Forecast {
       }));
       pointsWithCorrectSources.push(...enrichedBeachData);
     }
+    return pointsWithCorrectSources;
   }
 }
