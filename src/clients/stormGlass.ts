@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InternalError } from '@src/util/errors/internal-error';
 import config, { IConfig } from 'config';
-import * as HTTPUtil from '@src/util/request'
+import * as HTTPUtil from '@src/util/request';
 export interface StormGlassPointSource {
   [key: string]: number;
 }
@@ -79,7 +79,7 @@ export class StormGlass {
           `Error: ${JSON.stringify(error.data)} Code: ${error.status}`
         );
       }
-      
+
       throw new ClientRequestError(JSON.stringify(err));
     }
   }
