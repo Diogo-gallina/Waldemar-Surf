@@ -118,8 +118,8 @@ describe('Forecast Service', () => {
 
     const forecast = new Forecast(mockedStormGlassService);
 
-    await expect(
-      forecast.processForecastForBeach(beaches)
-    ).rejects.toThrow(ForecastProcessingInternalError);
+    await expect(forecast.processForecastForBeach(beaches)).rejects.toThrow(
+      ForecastProcessingInternalError
+    );
   });
 });
