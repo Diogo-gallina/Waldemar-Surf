@@ -1,6 +1,6 @@
 import { StormGlass } from '@src/clients/stormGlass';
 import stormGlassNormalizedResponseFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
-import { Forecast, Beach, BeachPosition } from '../forecast';
+import { Forecast, Beach, BeachPosition } from '../forecast.service';
 
 jest.mock('@src/clients/stormGlass');
 
