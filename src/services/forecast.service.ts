@@ -17,6 +17,11 @@ export interface Beach {
 
 export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {}
 
+export interface TimeForecast {
+  time: string,
+  forecast: BeachForecast[]
+}
+
 export class Forecast {
   constructor(protected stormGlass = new StormGlass()) {}
 
@@ -39,5 +44,9 @@ export class Forecast {
       pointsWithCorrectSources.push(...enrichedBeachData);
     }
     return pointsWithCorrectSources;
+  }
+
+  private mapForecastByTime(forecast: BeachForecast[]): TimeForecast[] {
+
   }
 }
