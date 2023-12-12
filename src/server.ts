@@ -3,7 +3,7 @@ import './util/module-alias.util';
 import bodyParser from 'body-parser';
 import { ForecastController } from './controllers/forecast.controller';
 import { Application } from 'express';
-import * as database from '@src/database'
+import * as database from '@src/database';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
@@ -27,6 +27,10 @@ export class SetupServer extends Server {
 
   private async databaseSetup(): Promise<void> {
     await database.connect();
+  }
+
+  public async close(): Promise<void> {
+    await database.close();
   }
 
   public getApp(): Application {
