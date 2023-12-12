@@ -12,9 +12,11 @@ export class BeachesController {
       const result = await beach.save();
       res.status(201).send(result);
     } catch (err) {
-      if (err instanceof mongoose.Error.ValidationError)
+      if (err instanceof mongoose.Error.ValidationError) {
         res.status(422).send({ error: (err as Error).message });
-      res.status(500).send({ error: 'Internal Server Error' });
+      } else {
+        res.status(500).send({ error: 'Internal Server Error' });
+      }
     }
   }
 }
