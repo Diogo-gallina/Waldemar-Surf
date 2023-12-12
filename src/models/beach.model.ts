@@ -15,14 +15,12 @@ export interface Beach {
   lng: number;
 }
 
-interface BeachModel extends Omit<Beach, '_id'>, Document {}
-
-const schema = new mongoose.Schema(
+const schema = new mongoose.Schema<Beach>(
   {
-    lat: { type: Number, require: true },
-    lng: { type: Number, require: true },
-    name: { type: String, require: true },
-    position: { type: String, require: true },
+    lat: { type: Number, required: true },
+    lng: { type: Number, required: true },
+    name: { type: String, required: true },
+    position: { type: String, required: true },
   },
   {
     toJSON: {
@@ -35,4 +33,5 @@ const schema = new mongoose.Schema(
   }
 );
 
-export const Beach: Model<BeachModel> = mongoose.model('Beach', schema);
+// interface BeachModel extends Omit<Beach, '_id'>, Document {}
+export const Beach: Model<Beach> = mongoose.model('Beach', schema);
