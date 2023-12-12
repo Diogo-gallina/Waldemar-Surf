@@ -1,7 +1,6 @@
-import { SuperTest, Test } from "supertest";
-
 declare global {
-  interface Global {
-    var testRequest: SuperTest<Test>;
-  }
+  //eslint-disable-next-line no-var
+  var testRequest: import('supertest').SuperTest<import('supertest').Test>;
 }
+
+export {};
