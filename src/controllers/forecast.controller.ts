@@ -8,8 +8,12 @@ const forecastService = new ForecastService()
 export class ForecastController {
   @Get('')
   public async getForecastForLoggedUser(_: Request, res: Response): Promise<void> {
+    try {
     const beaches = await Beach.find({})
     const forecastData = await forecastService.processForecastForBeach(beaches);
     res.status(200).send(forecastData);
+    } catch (err) {
+      res.status(500).send({ error: 'Something went wrong'});
+    }
   }
 }
