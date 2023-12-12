@@ -1,4 +1,4 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
 
 export enum BeachPosition {
   S = 'S',
@@ -34,3 +34,5 @@ const schema = new mongoose.Schema(
     },
   }
 );
+
+export const Beach: Model<BeachModel> = mongoose.model('Beach', schema);
