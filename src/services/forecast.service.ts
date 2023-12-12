@@ -13,7 +13,6 @@ export interface Beach {
   position: BeachPosition;
   lat: number;
   lng: number;
-  user: string;
 }
 
 export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {}
@@ -29,7 +28,7 @@ export class ForecastProcessingInternalError extends InternalError {
   }
 }
 
-export class Forecast {
+export class ForecastService {
   constructor(protected stormGlass = new StormGlass()) {}
 
   public async processForecastForBeach(
