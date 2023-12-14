@@ -1,11 +1,17 @@
+import { User } from '@src/models/user.model';
+
 describe('Users functional tests', () => {
+  beforeEach(async () => {
+    await User.deleteMany();
+  });
+  
   describe('When creating a new user', () => {
     it('should successfuly create a new user', async () => {
       const newUser = {
         name: 'John Doe',
         email: 'john@mail.com',
-        password: '1234'
-      }
+        password: '1234',
+      };
 
       const response = await global.testRequest.post('/users').send(newUser);
 
