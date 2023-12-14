@@ -1,6 +1,6 @@
-import { ForecastPoint, StormGlass } from '@src/clients/stormGlass';
-import { Beach } from '@src/models/beach.model';
+import { StormGlass, ForecastPoint } from '@src/clients/stormGlass';
 import { InternalError } from '@src/util/errors/internal-error';
+import { Beach } from '@src/models/beach.model';
 
 export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {}
 
@@ -25,20 +25,37 @@ export class ForecastService {
     try {
       for (const beach of beaches) {
         const points = await this.stormGlass.fetchPoints(beach.lat, beach.lng);
-        const enrichedBeachData = this.enrichedBeachData(points, beach);
+        const enrichedBeachData = this.enrichBeachData(points, beach);
         pointsWithCorrectSources.push(...enrichedBeachData);
       }
       return this.mapForecastByTime(pointsWithCorrectSources);
-    } catch (err) {
-      throw new ForecastProcessingInternalError((err as Error).message);
+    } catch (error) {
+      throw new ForecastProcessingInternalError((error as Error).message);
     }
   }
 
-  private enrichedBeachData(
+  private mapForecastByTime(forecast: BeachForecast[]): TimeForecast[] {
+    const forecastByTime: TimeForecast[] = [];
+    for (const point of forecast) {
+      const timePoint = forecastByTime.find((f) => f.time === point.time);
+      if (timePoint) {
+        timePoint.forecast.push(point);
+      } else {
+        forecastByTime.push({
+          time: point.time,
+          forecast: [point],
+        });
+      }
+    }
+    return forecastByTime;
+  }
+
+  private enrichBeachData(
     points: ForecastPoint[],
     beach: Beach
   ): BeachForecast[] {
     return points.map((e) => ({
+      ...{},
       ...{
         lat: beach.lat,
         lng: beach.lng,
@@ -48,20 +65,5 @@ export class ForecastService {
       },
       ...e,
     }));
-  }
-
-  private mapForecastByTime(forecast: BeachForecast[]): TimeForecast[] {
-    const forecastByTime: TimeForecast[] = [];
-    for (const point of forecast) {
-      const timePoint = forecastByTime.find((f) => f.time === point.time);
-
-      if (timePoint) timePoint.forecast.push(point);
-
-      forecastByTime.push({
-        time: point.time,
-        forecast: [point],
-      });
-    }
-    return forecastByTime;
   }
 }
