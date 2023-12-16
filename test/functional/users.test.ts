@@ -19,7 +19,7 @@ describe('Users functional tests', () => {
       expect(response.body).toEqual(expect.objectContaining(newUser));
     });
 
-    it('should throw 400 when there is a validation error', async () => {
+    it('should return 400 when there is a validation error', async () => {
       const newUser = {
         email: 'john@mail.com',
         password: '1234',
