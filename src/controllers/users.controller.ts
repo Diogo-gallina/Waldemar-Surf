@@ -2,6 +2,7 @@ import { Controller, Post } from '@overnightjs/core';
 import { User } from '@src/models/user.model';
 import { Request, Response } from 'express';
 import { BaseController } from './index';
+import AuthService from '@src/services/auth.service';
 
 @Controller('users')
 export class UsersController extends BaseController {
@@ -14,5 +15,17 @@ export class UsersController extends BaseController {
     } catch (error) {
       this.sendCreateUpdateErrorResponse(res, error);
     }
+  }
+
+  @Post('authenticate')
+  public async authenticate(req: Request, res: Response): Promise<void> {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if(!user) return;
+
+    if(!(await AuthService.comparePasswords(password, user.password))) return;
+
+    const token = AuthService.generateToken(user.toJSON())
+    res.status(200).send({token: token })
   }
 }
