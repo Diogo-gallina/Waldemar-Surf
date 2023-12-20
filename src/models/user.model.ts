@@ -1,5 +1,6 @@
+import AuthService from '@src/services/auth.service';
 import mongoose, { Document, Model } from 'mongoose';
-import bcrypt from 'bcrypt';
+
 export interface User extends Document {
   name: string;
   email: string;
@@ -36,28 +37,14 @@ schema.path('email').validate(
   CUSTOM_VALIDATION.DUPLICATED
 );
 
-export async function hashPassword(
-  password: string,
-  salt = 10
-): Promise<string> {
-  return bcrypt.hash(password, salt);
-}
-
-export async function comparePasswords(
-  password: string,
-  hashedPassword: string
-): Promise<boolean> {
-  return bcrypt.compare(password, hashedPassword);
-}
-
-schema.pre<User>('save', async function(): Promise<void> {
+schema.pre<User>('save', async function (): Promise<void> {
   if (!this.password || !this.isModified('password')) return;
 
   try {
-    const hashedPassword = await hashPassword(this.password);
+    const hashedPassword = await AuthService.hashPassword(this.password);
     this.password = hashedPassword;
   } catch (error) {
-    console.error(`Error hashing the password for the user ${this.name}`)
+    console.error(`Error hashing the password for the user ${this.name}`);
   }
 });
 
