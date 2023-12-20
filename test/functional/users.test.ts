@@ -16,7 +16,12 @@ describe('Users functional tests', () => {
       expect(
         comparePasswords(newUser.password, response.body.password)
       ).resolves.toBeTruthy();
-      expect(response.body).toEqual(expect.objectContaining(newUser));
+      expect(response.body).toEqual(
+        expect.objectContaining({
+          ...newUser,
+          ...{ password: expect.any(String) },
+        })
+      );
     });
 
     it('Should return 422 when there is a validation error', async () => {
