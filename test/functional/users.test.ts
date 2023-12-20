@@ -42,7 +42,7 @@ describe('Users functional tests', () => {
       expect(response.status).toBe(409);
       expect(response.body).toEqual({
         code: 409,
-        error: 'User validation failed: email: already exists in the database.',
+        error: 'User validation failed: email: already exists in the database',
       });
     });
   });
