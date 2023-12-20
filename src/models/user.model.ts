@@ -50,4 +50,15 @@ export async function comparePasswords(
   return bcrypt.compare(password, hashedPassword);
 }
 
+schema.pre<User>('save', async function(): Promise<void> {
+  if (!this.password || !this.isModified('password')) return;
+
+  try {
+    const hashedPassword = await hashPassword(this.password);
+    this.password = hashedPassword;
+  } catch (error) {
+    console.error(`Error hashing the password for the user ${this.name}`)
+  }
+});
+
 export const User: Model<User> = mongoose.model<User>('User', schema);
