@@ -71,28 +71,27 @@ describe('Users functional tests', () => {
       expect(response.body).toEqual(
         expect.objectContaining({ token: expect.any(String) })
       );
+    });
+    it('Should return UNAUTHORIZED if the user with the given email is not found', async () => {
+      const response = await global.testRequest
+        .post('/users/authenticate')
+        .send({ email: 'some-email@mail.com', password: '1234' });
 
-      it('should return Unauthorized if the user with the given email is not found', async () => {
-        const response = await global.testRequest
-          .post('/users/authenticate')
-          .send({ email: 'some-email@mail.com', password: '1234' });
+      expect(response.status).toBe(401);
+    });
 
-        expect(response.status).toBe(401);
-      });
+    it('Should return UNAUTHORIZED if the user is found but the password does not match', async () => {
+      const newUser = {
+        name: 'John Doe',
+        email: 'john@mail.com',
+        password: '1234',
+      };
+      await new User(newUser).save();
+      const response = await global.testRequest
+        .post('/users/authenticate')
+        .send({ email: newUser.email, password: 'different password' });
 
-      it('should return Unauthorized if the User is found but the password does not match', async () => {
-        const newUser = {
-          name: 'John Doe',
-          email: 'john@mail.com',
-          password: '1234',
-        };
-        await new User(newUser).save();
-        const response = await global.testRequest
-          .post('/users/authenticate')
-          .send({ email: newUser.email, password: 'different password' });
-
-        expect(response.status).toBe(401);
-      });
+      expect(response.status).toBe(401);
     });
   });
 });
