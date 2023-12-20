@@ -40,7 +40,14 @@ export async function hashPassword(
   password: string,
   salt = 10
 ): Promise<string> {
-  return await bcrypt.hash(password, salt);
+  return bcrypt.hash(password, salt);
+}
+
+export async function comparePasswords(
+  password: string,
+  hashedPassword: string
+): Promise<boolean> {
+  return bcrypt.compare(password, hashedPassword);
 }
 
 export const User: Model<User> = mongoose.model<User>('User', schema);
