@@ -8,7 +8,7 @@
       "key": "some-key",
       "tokenExpiresIn": "20000000"
     },
-    "resources": {
+    "resource": {
       "StormGlass": {
         "apiUrl": "https://api.stormglass.io/v2",
         "apiToken": "do-not-hard-code"
