@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import config from 'config';
+
 export default class AuthService {
   public static async hashPassword(
     password: string,
@@ -16,8 +18,12 @@ export default class AuthService {
   }
 
   public static generateToken(payload: object): string {
-    return jwt.sign(payload, 'test', {
-        expiresIn: 10000,
-    })
+    const expiresIn = config.get<number>('App.auth.tokenExpiresIn');
+    const key = config.get<string>('App.auth.key');
+
+    return jwt.sign(payload, key, {
+      expiresIn,
+      algorithm: 'HS256',
+    });
   }
 }
