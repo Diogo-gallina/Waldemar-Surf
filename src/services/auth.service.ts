@@ -32,7 +32,7 @@ export default class AuthService {
     });
   }
 
-  public static decodeToken(token: string): object {
-    return jwt.verify(token, config.get<string>('App.auth.key'))
+  public static decodeToken(token: string): DecodedUser {
+    return jwt.verify(token, config.get<string>('App.auth.key')) as DecodedUser;
   }
 }
