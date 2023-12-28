@@ -6,6 +6,9 @@ describe('Beaches functional tests', () => {
     email: 'johndoe@example.com',
     password: '1234',
   };
+  beforeEach(async() => {
+    await Beach.deleteMany({});
+  })
   describe('When creating a beach', () => {
     it('should create a beach with sucess', async () => {
       const newBeach = {
