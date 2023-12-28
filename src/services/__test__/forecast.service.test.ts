@@ -111,7 +111,6 @@ describe('Forecast Service', () => {
       },
     ];
 
-
     mockedStormGlassService.fetchPoints.mockRejectedValue(
       'Error fetching data'
     );
