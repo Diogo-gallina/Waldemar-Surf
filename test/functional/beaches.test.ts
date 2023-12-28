@@ -1,4 +1,6 @@
 import { Beach } from '@src/models/beach.model';
+import { User } from '@src/models/user.model';
+import AuthService from '@src/services/auth.service';
 
 describe('Beaches functional tests', () => {
   const defaultUser = {
@@ -6,8 +8,12 @@ describe('Beaches functional tests', () => {
     email: 'johndoe@example.com',
     password: '1234',
   };
+  let token: string;
   beforeEach(async() => {
     await Beach.deleteMany({});
+    await User.deleteMany({});
+    const user = await new User(defaultUser).save();
+    token = AuthService.generateToken(defaultUser);
   })
   describe('When creating a beach', () => {
     it('should create a beach with sucess', async () => {
