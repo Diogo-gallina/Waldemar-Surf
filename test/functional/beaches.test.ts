@@ -1,8 +1,11 @@
 import { Beach } from '@src/models/beach.model';
 
 describe('Beaches functional tests', () => {
-  beforeAll(async () => await Beach.deleteMany({}));
-
+  const defaultUser = {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    password: '1234',
+  };
   describe('When creating a beach', () => {
     it('should create a beach with sucess', async () => {
       const newBeach = {
