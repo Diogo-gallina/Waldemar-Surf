@@ -13,7 +13,7 @@ describe('Beaches functional tests', () => {
     await Beach.deleteMany({});
     await User.deleteMany({});
     const user = await new User(defaultUser).save();
-    token = AuthService.generateToken(defaultUser);
+    token = AuthService.generateToken(user.toJSON());
   });
   describe('When creating a beach', () => {
     it('should create a beach with sucess', async () => {
