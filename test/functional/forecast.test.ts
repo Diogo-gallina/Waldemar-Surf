@@ -5,7 +5,6 @@ import nock from 'nock';
 import AuthService from '@src/services/auth.service';
 import { User } from '@src/models/user.model';
 
-
 describe('Beach forecast functional tests', () => {
   const defaultUser = {
     name: 'John Doe',

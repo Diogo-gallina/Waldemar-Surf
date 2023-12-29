@@ -15,8 +15,9 @@ export class ForecastController {
     res: Response
   ): Promise<void> {
     try {
-      const beaches = await Beach.find({user: req.decoded?.id});
-      const forecastData = await forecastService.processForecastForBeach(beaches);
+      const beaches = await Beach.find({ user: req.decoded?.id });
+      const forecastData =
+        await forecastService.processForecastForBeach(beaches);
       res.status(200).send(forecastData);
     } catch (error) {
       res.status(500).send({ error: 'Something went wrong' });
