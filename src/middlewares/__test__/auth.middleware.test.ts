@@ -8,7 +8,7 @@ describe('Auth Middleware', () => {
       headers: {
         'x-access-token': jwtToken,
       },
-    }
+    };
     const resFake = {};
     const nextFake = jest.fn();
     authMiddleware(reqFake, resFake, nextFake);
