@@ -11,7 +11,7 @@ export class UsersController extends BaseController {
     try {
       const user = new User(req.body);
       const newUser = await user.save();
-      res.status(201).send({ newUser });
+      res.status(201).send(newUser);
     } catch (error) {
       this.sendCreateUpdateErrorResponse(res, error);
     }
