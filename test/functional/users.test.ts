@@ -12,9 +12,7 @@ describe('Users functional tests', () => {
         email: 'john@mail.com',
         password: '1234',
       };
-      const response = await global.testRequest
-        .post('/users')
-        .send({ newUser });
+      const response = await global.testRequest.post('/users').send(newUser);
       expect(response.status).toBe(201);
       expect(
         AuthService.comparePasswords(newUser.password, response.body.password)
@@ -32,9 +30,7 @@ describe('Users functional tests', () => {
         email: 'john@mail.com',
         password: '1234',
       };
-      const response = await global.testRequest
-        .post('/users')
-        .send({ newUser });
+      const response = await global.testRequest.post('/users').send(newUser);
 
       expect(response.status).toBe(422);
       expect(response.body).toEqual({
@@ -49,10 +45,8 @@ describe('Users functional tests', () => {
         email: 'john@mail.com',
         password: '1234',
       };
-      await global.testRequest.post('/users').send({ newUser });
-      const response = await global.testRequest
-        .post('/users')
-        .send({ newUser });
+      await global.testRequest.post('/users').send(newUser);
+      const response = await global.testRequest.post('/users').send(newUser);
 
       expect(response.status).toBe(409);
       expect(response.body).toEqual({
