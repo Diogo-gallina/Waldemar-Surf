@@ -8,7 +8,7 @@ import { BeachesController } from './controllers/beaches.controller';
 import { UsersController } from './controllers/users.controller';
 
 export class SetupServer extends Server {
-  constructor(private port = 3000) {
+  constructor(private port = 4351) {
     super();
   }
 
