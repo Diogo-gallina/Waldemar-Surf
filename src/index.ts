@@ -2,6 +2,11 @@ import logger from './logger';
 import { SetupServer } from './server';
 import config from 'config';
 
+enum ExitStatus {
+  Failure = 1,
+  Success = 0,
+}
+
 (async (): Promise<void> => {
   try {
     const server = new SetupServer(config.get('App.port'));
@@ -9,6 +14,6 @@ import config from 'config';
     server.start();
   } catch (error) {
     logger.error('App exited with error: ' + error);
-    process.exit(1);
+    process.exit(ExitStatus.Failure);
   }
 })();
