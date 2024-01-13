@@ -22,7 +22,7 @@ enum ExitStatus {
           process.exit(ExitStatus.Success);
         } catch (error) {
           logger.error('App exited with error ' + error);
-          process.exit(ExitStatus.Failure);
+          process.exit(ExitStatus.Failure );
         }
       })
     );
