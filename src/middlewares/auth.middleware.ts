@@ -1,3 +1,4 @@
+import logger from '@src/logger';
 import AuthService from '@src/services/auth.service';
 import { NextFunction, Request, Response } from 'express';
 
@@ -11,10 +12,12 @@ export function authMiddleware(
     const decoded = AuthService.decodeToken(token as string);
     req.decoded = decoded;
     next();
-  } catch (err) {
-    if (err instanceof Error) {
-      res.status?.(401).send({ code: 401, error: err.message });
+  } catch (error) {
+    if (error instanceof Error) {
+      logger.error(error)
+      res.status?.(401).send({ code: 401, error: error.message });
     } else {
+      logger.error(error)
       res.status?.(401).send({ code: 401, error: 'Unknown auth error' });
     }
   }
