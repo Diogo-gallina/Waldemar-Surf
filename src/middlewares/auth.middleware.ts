@@ -14,10 +14,8 @@ export function authMiddleware(
     next();
   } catch (error) {
     if (error instanceof Error) {
-      logger.error(error)
       res.status?.(401).send({ code: 401, error: error.message });
     } else {
-      logger.error(error)
       res.status?.(401).send({ code: 401, error: 'Unknown auth error' });
     }
   }
