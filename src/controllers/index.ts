@@ -28,6 +28,7 @@ export abstract class BaseController {
     if (duplicatedKindErrors.length) {
       return { code: 409, error: error.message };
     }
+    logger.error(error);
     return { code: 422, error: error.message };
   }
 }
