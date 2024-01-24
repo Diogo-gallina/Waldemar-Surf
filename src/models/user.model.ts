@@ -47,6 +47,6 @@ schema.pre<User>('save', async function (): Promise<void> {
   } catch (error) {
     logger.error(`Error hashing the password for the user ${this.name}`);
   }
-});
+})
 
 export const User: Model<User> = mongoose.model<User>('User', schema);
