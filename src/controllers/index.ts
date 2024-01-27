@@ -21,9 +21,9 @@ export abstract class BaseController {
     error: string;
   } {
     const duplicatedKindErrors = Object.values(error.errors).filter(
-      (error) =>
-      error.name === 'ValidatorError' &&
-      error.kind === CUSTOM_VALIDATION.DUPLICATED
+      (err) =>
+        err.name === 'ValidatorError' &&
+        err.kind === CUSTOM_VALIDATION.DUPLICATED
     );
     if (duplicatedKindErrors.length) {
       return { code: 409, error: error.message };
