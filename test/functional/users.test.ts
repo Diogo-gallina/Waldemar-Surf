@@ -93,5 +93,12 @@ describe('Users functional tests', () => {
 
       expect(response.status).toBe(401);
     });
+
+    describe('When getting user profile info', () => {
+      it('', async () => {
+    
+      });
+    });
+    
   });
 });
