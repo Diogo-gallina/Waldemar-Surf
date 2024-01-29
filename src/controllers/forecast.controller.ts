@@ -3,13 +3,14 @@ import { Request, Response } from 'express';
 import { Beach } from '@src/models/beach.model';
 import { ForecastService } from '@src/services/forecast.service';
 import { authMiddleware } from '@src/middlewares/auth.middleware';
+import { BaseController } from './index';
 import logger from '@src/logger';
 
 const forecastService = new ForecastService();
 
 @Controller('forecast')
 @ClassMiddleware(authMiddleware)
-export class ForecastController {
+export class ForecastController extends BaseController {
   @Get('')
   public async getForecastForgeLoggedUser(
     req: Request,
