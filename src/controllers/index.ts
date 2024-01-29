@@ -2,6 +2,7 @@ import logger from '@src/logger';
 import { CUSTOM_VALIDATION } from '@src/models/user.model';
 import { Response } from 'express';
 import mongoose from 'mongoose';
+import ApiError, { APIError } from '@src/util/errors/api-error';
 
 export abstract class BaseController {
   protected sendCreateUpdateErrorResponse(res: Response, error: unknown): void {
@@ -30,5 +31,9 @@ export abstract class BaseController {
     }
     logger.error(error);
     return { code: 422, error: error.message };
+  }
+
+  protected sendErrorResponse(res: Response, apiError: APIError): Response {
+    return res.status(apiError.code).send(ApiError.format(apiError));
   }
 }
