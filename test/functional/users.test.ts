@@ -113,21 +113,21 @@ describe('Users functional tests', () => {
       });
     });
 
-    it('should return Not Found, when the user is not found', async () => {
+    it(`should return Not Found, when the user is not found`, async () => {
       const newUser = {
         name: 'John Doe',
         email: 'john@mail.com',
         password: '1234',
       };
-
-      const user = await new User(newUser).save();
+      //create a new user but don't save it
+      const user = new User(newUser);
       const token = AuthService.generateToken(user.toJSON());
-      const { body, status} = await global.testRequest
+      const { body, status } = await global.testRequest
         .get('/users/me')
-        .set({'x-access-token': token})
+        .set({ 'x-access-token': token });
 
       expect(status).toBe(404);
-      expect(body.message).toBe('User not found');      
+      expect(body.message).toBe('User not found!');
     });
     
   });
