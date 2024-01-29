@@ -23,7 +23,10 @@ export class ForecastController extends BaseController {
       res.status(200).send(forecastData);
     } catch (error) {
       logger.error(error);
-      res.status(500).send({ error: 'Something went wrong' });
+      this.sendErrorResponse(res, {
+        code: 500,
+        message: 'Something went wrong',
+      });
     }
   }
 }
