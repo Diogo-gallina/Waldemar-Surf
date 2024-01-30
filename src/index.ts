@@ -14,7 +14,7 @@ enum ExitStatus {
     server.start();
 
     const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
-    exitSignals.map((sig) =>
+    exitSignals.forEach((sig) =>
       process.on(sig, async () => {
         try {
           await server.close();
