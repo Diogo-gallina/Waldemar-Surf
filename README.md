@@ -2,9 +2,16 @@
 🌊Weather API for Surf Enthusiasts: Discover the Best Beaches Based on Ideal Weather Conditions
 
 
-# Technology
-- Typescript 
+## 💻 Technologies Used
+
+- Typescript
+- Node.js
+- Overnightjs
+- Express
 - MongoDB
+- Jest
+- JWT (JSON Web Tokens)
+- Docker
 
 
 ### 🤝 Contributors
